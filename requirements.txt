@@ -1,0 +1,4 @@
+Flask==2.3.2
+mysql-connector-python==8.0.33
+apscheduler==3.10.1
+PyJWT==2.8.0
