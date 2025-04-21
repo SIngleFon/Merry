@@ -88,7 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const submitSection = document.getElementById('submit-section');
   const nonAlcoholicCheckbox = document.getElementById('non-alcoholic');
   const nonAlcoholicInput = document.getElementById('non-alcoholic-input');
-
+  window.history.scrollRestoration = "manual"; // Отключаем сохранение позиции прокрутки
+  window.scrollTo(0, 0);
   // Показываем/скрываем секции в зависимости от выбора
   attendanceYes.addEventListener('change', () => {
     if (attendanceYes.checked) {
@@ -156,5 +157,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //   // Обновляем высоту при изменении размера окна
 //   window.addEventListener("resize", setHeroHeight);
+const elementsToAnimate = document.querySelectorAll(
+  ".timeline__event, .section__title, .section__text, .venue__img, .directions__text h3, .directions__text p, .line"
+);
 
+const handleScroll = () => {
+  const scrollPosition = window.scrollY + window.innerHeight; // Текущая позиция прокрутки + высота окна
+
+  elementsToAnimate.forEach((element) => {
+      const rect = element.getBoundingClientRect(); // Положение элемента относительно окна
+      const elementPosition = element.offsetTop; // Позиция элемента относительно документа
+
+      // Если элемент находится в зоне видимости или выше текущей позиции
+      if (scrollPosition >= elementPosition && rect.top <= window.innerHeight) {
+          element.classList.add("visible");
+      }
+  });
+};
+
+// Проверяем элементы сразу при загрузке страницы
+handleScroll();
+
+// Запускаем проверку при прокрутке
+window.addEventListener("scroll", handleScroll);
 });

@@ -11,7 +11,8 @@ def get_db_connection():
             password=os.getenv('MYSQL_PASS'), 
             host="localhost",
             port="3306",
-            database="u3104955_default"
+            database="u3104955_default",
+            auth_plugin="mysql_native_password"
         )
         print("Соединение с базой данных установлено успешно.")
         return conn
@@ -27,6 +28,26 @@ application.static_folder = 'static'
 def load_page():  
     return render_template('invite.html')  
 
+@application.route("/invitelist")
+def invite_list():
+    try:
+        # Подключаемся к базе данных
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)  # Используем dictionary=True для удобства работы с данными
+
+        # Извлекаем данные из таблицы
+        cursor.execute("SELECT * FROM survey_responses")
+        responses = cursor.fetchall()
+
+        cursor.close()
+        conn.close()
+
+        # Передаём данные в шаблон
+        return render_template('invitelist.html', responses=responses)
+    except Exception as e:
+        print(f"Ошибка при извлечении данных: {e}")
+        return jsonify({"error": f"Произошла ошибка: {str(e)}"}), 500
+    
 @application.route("/submit", methods=["POST"])
 def submit_survey():
     try:
@@ -39,6 +60,12 @@ def submit_survey():
         # Преобразуем список имен и напитков в строки
         names_str = ", ".join(names)
         drinks_str = ", ".join(drinks)
+
+        # Логируем полученные данные
+        print(f"attendance: {attendance}")
+        print(f"names: {names}")
+        print(f"drinks: {drinks}")
+        print(f"non_alcoholic_drink: {non_alcoholic_drink}")
 
         # Подключаемся к базе данных
         conn = get_db_connection()
@@ -59,11 +86,12 @@ def submit_survey():
         # Редирект на главную страницу
         return redirect(url_for('load_page'))
     except Exception as e:
+        # Логируем подробности ошибки
         print(f"Ошибка при обработке данных: {e}")
-        return jsonify({"error": "Произошла ошибка при обработке данных"}), 500
+        return jsonify({"error": f"Произошла ошибка: {str(e)}"}), 500
 
 
 if __name__ == '__main__':
-    # application.run(debug=True, host='0.0.0.0')
-    application.run(debug=False)
+    application.run(debug=True, host='0.0.0.0')
+    # application.run(debug=False)
 
