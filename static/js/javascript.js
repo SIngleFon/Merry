@@ -1,7 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const countdownElement = document.querySelector(".countdown");
+
   // Таймер обратного отсчёта
   const weddingDate = new Date("September 19, 2025 00:00:00").getTime();
-  setInterval(function () {
+  const interval = setInterval(function () {
     const now = new Date().getTime();
     const distance = weddingDate - now;
 
@@ -15,9 +17,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("minutes").innerHTML = minutes;
     document.getElementById("seconds").innerHTML = seconds;
 
+    // Показываем блок countdown после загрузки данных
+    // Показываем блок countdown после загрузки данных
+    if (!countdownElement.classList.contains("visible")) {
+      countdownElement.classList.add("visible");
+    }
+
     if (distance < 0) {
-      clearInterval();
-      document.querySelector(".countdown").innerHTML = "Свадьба уже состоялась!";
+      clearInterval(interval);
+      countdownElement.innerHTML = "Свадьба уже состоялась!";
     }
   }, 1000);
 

@@ -54,8 +54,18 @@ body {
     display: flex; /* Используем flexbox для управления содержимым */
     flex-direction: column; /* Располагаем элементы вертикально */
     justify-content: space-between; /* Размещаем элементы с интервалами */
+    animation: fadeIn 3s ease-in-out;
 }
-
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      background-color: #fff; /* Начальный белый фон */
+  }
+  100% {
+      opacity: 1;
+      background-color: transparent; /* Прозрачный фон */
+  }
+}
 .hero::before {
     content: ''; /* Создаем пустой элемент */
     position: absolute;
@@ -73,14 +83,33 @@ body {
     position: relative; /* Устанавливаем текст поверх затемнения */
     z-index: 2; /* Текст выше затемнения */
 }
+/* Анимация для подъема текста */
+@keyframes slideUp {
+  0% {
+      transform: translateY(100%); /* Начальная позиция: снизу */
+      opacity: -1; /* Полностью прозрачный */
+  }
+  100% {
+      transform: translateY(0); /* Конечная позиция: на своем месте */
+      opacity: 1; /* Полностью видимый */
+  }
+}
 
 .hero .section__title {
     font-size: 2.8rem;
     font-weight: 300;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     color: #fff;
+    animation: slideUp 1s ease-out; /* Анимация подъема с прозрачностью */
 }
 
+.hero .section__content .section__text {
+  margin-top: 0;
+  width: 100%;
+  font-size: 1.2rem;
+  color: #fff !important;
+  animation: slideUp 1s ease-out; /* Анимация подъема с прозрачностью */
+}
 .hero .section__text {
     font-size: 1.2rem;
     margin-bottom: 20px;
@@ -94,7 +123,15 @@ body {
     z-index: 2; /* Текст и кнопка выше затемнения */
 }
 
+.hero .section__content p {
+  margin: 0; /* Убираем отступы */
+  line-height: 1; /* Устанавливаем межстрочный интервал */
+}
+
+
+
 .datefor {
+  margin-top: auto;
     display: flex; /* Используем flexbox для управления содержимым */
     flex-direction: column; /* Располагаем элементы вертикально */
     align-items: center; /* Центрируем элементы по горизонтали */
@@ -159,177 +196,7 @@ body {
         padding: 80px 15px; /* Уменьшаем отступы внутри секции */
     }
 }
-  /* ================= = ГЛАВНАЯ ===================   */
-  /* .hero {
-    position: relative;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    background: #474745;
-  }
   
-  .hero {
-    position: relative;
-    width: 100%;
-    height: 100vh;
-    overflow: hidden; 
-    font-family: 'Playfair Display';
-  }
-  
-  .hero__bg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-    left: 0;
-    filter: brightness(0.63);
-    z-index: 0;
-  }
-  
-  .hero::before, .hero::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    height: 100%;
-    background: inherit;
-    
-    z-index: 1;
-  }
-  
-  .hero::before {
-    left: 0;
-  }
-  
-  .hero::after {
-    right: 0;
-  }
-  
-  
-  .hero__overlay {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    color: #fafafa;
-  }
-  .hero__title {
-    padding-top: 20%;
-  
-    font-family: 'Playfair Display';
-    font-weight: 600; 
-    font-size: 2.7rem;
-    margin: 0 0 30px 0;
-  }
-  .hero__sub {
-    font-size: 1.07rem;
-    margin-bottom: 10px;
-  }
-  .hero__date {
-    
-    padding-top: 5%;
-    font-weight: 600;
-    font-size: 20px;
-    margin-bottom: 26px;
-  } */
-  
-
-
-
-
-
-  /* .btn {
-    border: none;
-    outline: none;
-    padding: 12px 39px;
-    font-size: 1.04rem;
-    border-radius: 6px;
-    background: #474745;
-    color: #fff;
-    font-family: 'Open Sans', Arial, sans-serif;
-    cursor: pointer;
-    margin-top: 14px;
-    transition: background 0.2s;
-    z-index: 3;
-  }
-  .btn--main {
-    background: #92816c;
-  }
-  .btn--main:hover { background: #7f6f67; }
-  .btn--form {
-    background: #474745;
-  } */
-
-
-
-
-
-
-
-
-  /* =========ПРОГРАММА========= */
-  /* .program {
-    padding: 36px 0 20px 0;
-    background: #fff;
-    font-family: 'Playfair Display';
-  }
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; 
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0;
-    font-size: 1.8rem; 
-    line-height: 3; 
-  }
-  .timeline__event {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 40px; 
-  }
-  .timeline__time {
-    font-size: 1.9rem;
-    font-weight: 800;
-    min-width: 70px; 
-    text-align: center;
-    
-    font-weight: lighter;
-  }
-  .timeline__icon {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-  }
-  .timeline__details {
-    display: flex;
-    flex-direction: column;
-  }
-  .timeline__title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 5px;
-  }
-  .timeline__desc {
-    font-size: 1rem;
-    color: #474745;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .timeline__desc span {
-    display: block;
-    align-items: right;
-    font-size: 0.96em;
-    font-weight: 100;
-    color: #979493;
-  } */
-
-
-
-/* Стили для секции "Программа дня" */
 /* Стили для секции "Программа дня" */
 .program {
     padding: 40px 0;
@@ -493,31 +360,7 @@ body {
       height: 300px; /* Уменьшаем высоту карты */
     }
   }
-  /* .order {
-    background: #fff;
-    text-align: center;
-    padding: 38px 0 30px 0;
-  }
-  .order__form {
-    margin: 38px auto 10px auto;
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    max-width: 700px;
-  }
-  .order__form input {
-    border: 1px solid #bebcb3;
-    background: #fafafa;
-    padding: 11px 15px;
-    border-radius: 6px;
-    font-size: 1em;
-    min-width: 175px;
-    font-family: inherit;
-    margin-bottom: 6px;
-  } */
-
-
+  
 
 /* ===========================
    Общие стили для секций
@@ -594,14 +437,33 @@ body {
 
 
 /* =================== СЧЕТЧИК ================== */
-  .countdown {
-    text-align: center;
-    font-family: 'Playfair Display', serif;
-    margin: 0 auto 20px auto;
-    color: white;
-    padding-bottom: 40px;
-    border-radius: 15px;
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.8); /* Начальный размер 80% */
   }
+  100% {
+    transform: scale(1); /* Конечный размер 100% */
+  }
+}
+
+.countdown {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  margin: 0 auto 20px auto;
+  color: white;
+  border-radius: 15px;
+  min-height: 100px;
+  visibility: hidden; /* Элемент невидим, но занимает место */
+  opacity: 0; /* Полностью прозрачный */
+  transition: opacity 0.5s ease, visibility 0.5s ease; /* Плавный переход */
+}
+
+.countdown.visible {
+  visibility: visible; /* Делаем элемент видимым */
+  opacity: 1; /* Полностью видимый */
+  animation: scaleUp 0.5s ease-out forwards; /* Добавляем forwards для сохранения конечного состояния */
+}
+
   .countdown h1 {
     font-size: 32px;
     margin-bottom: 20px;
@@ -610,17 +472,22 @@ body {
     display: flex;
     justify-content: center;
     gap: 20px;
+    
   }
   .time div {
     font-size: 55px;
     font-weight: normal;
+    flex: 1; 
+    /* min-width: 40px; */
+    text-align: center;
   }
   .time span {
     font-size: 16px;
     display: block;
   }
   .separator {
-    width: 0.1px; 
+    width: 0.1px !important; 
+    min-width: 0.1px !important;
     height: auto; 
     background-color: rgb(169, 169, 169);
     margin: 0 20px;
@@ -638,13 +505,23 @@ body {
         margin-bottom: 10px;
       }
     .time div {
-        font-size: 30px;
+        font-size: 25px;
         font-weight: normal;
+       
+    }
+    .countdown{
+      /* min-height: 10px; */
+      margin: 0, 0,0,0;
+      min-height: 0;
+    }
+    .hero .section__content .section__text {
+        font-size: 1rem;
     }
     .time span {
         font-size: 16px;
         display: block;
     }
+
 }
   @media (max-width: 540px) {
     .time {
@@ -652,6 +529,9 @@ body {
         justify-content: center;
         gap: 0px;
       }
+    .hero .datefor .section__text{
+        font-size: 1rem;
+    }
   }
 
   /* ================ ОПРОС ================= */
