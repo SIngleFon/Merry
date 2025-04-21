@@ -1,19 +1,9 @@
 import os
 from flask import Flask, render_template, request, jsonify, url_for, redirect
-import sqlite3
-from datetime import datetime, timedelta
-import hashlib
-import hmac
-import json
-from operator import itemgetter
-from typing import Callable, Any, Dict
-from urllib.parse import parse_qsl
-import jwt
-from functools import wraps
-from apscheduler.schedulers.background import BackgroundScheduler
+from dotenv import load_dotenv
 import mysql.connector
 
-
+load_dotenv()
 def get_db_connection():
     try:
         conn = mysql.connector.connect(
@@ -28,30 +18,16 @@ def get_db_connection():
     except mysql.connector.Error as err:
         print(f"Ошибка при подключении к базе данных: {err}")
         raise
-app = Flask(__name__)
+application = Flask(__name__)
 
-app.static_folder = 'static'
-app.config['SECRET_KEY'] = "asdf139@mmdilarqw!/ASASKqsad"
-
-SECRET_KEY = "asdf139@mmdilarqw!/ASASKqsad"
-# TELEGRAM_BOT_TOKEN = "6906358974:AAF7kFk6CsE1sTGxT6mvtXRPCxX511_rRGY"
+application.static_folder = 'static'
 
 
-# SECRET_KEY = os.getenv("SECRET_KEY")
-TELEGRAM_BOT_TOKEN = os.getenv("BOT_TOKEN")
-
-
-
-# @app.route("/miniapp")
-# # @token_required
-# def web():  
-#     return render_template('miniapp.html')  
-
-@app.route("/")
+@application.route("/")
 def load_page():  
     return render_template('invite.html')  
 
-@app.route("/submit", methods=["POST"])
+@application.route("/submit", methods=["POST"])
 def submit_survey():
     try:
         # Получаем данные из формы
@@ -88,5 +64,4 @@ def submit_survey():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port='80')
-    # create_tables()
+    application.run(debug=False)
