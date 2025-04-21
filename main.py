@@ -7,11 +7,11 @@ load_dotenv()
 def get_db_connection():
     try:
         conn = mysql.connector.connect(
-            user="root", 
+            user="u3104955_default", 
             password=os.getenv('MYSQL_PASS'), 
-            host="amvera-singlefon-run-database",
+            host="localhost",
             port="3306",
-            database="svadba"
+            database="u3104955_default"
         )
         print("Соединение с базой данных установлено успешно.")
         return conn
