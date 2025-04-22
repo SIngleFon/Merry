@@ -58,6 +58,7 @@ body {
 
   } */
   .hero {
+    font-family: 'Playfair Display', serif;
     position: relative;
     width: auto;
     height: calc(var(--vh) * 100);
