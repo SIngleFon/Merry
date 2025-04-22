@@ -54,16 +54,19 @@ body {
   /* ===========================
      Заголовок (Hero)
   =========================== */
+  /* .section .hero {
+
+  } */
   .hero {
     position: relative;
     width: auto;
-    height: calc(100vh - 80px);
+    height: calc(var(--vh) * 100);
     background-image: url('../../static/photo/ph1.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     color: #fff;
-    padding: 20px;
+    /* padding: 20px; */
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -105,6 +108,11 @@ body {
   }
   
   .hero .section__title {
+    font-family: 'Playfair Display', serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     font-size: 2.8rem;
     font-weight: 300;
     margin-bottom: 0;
@@ -296,8 +304,8 @@ body {
   .timeline__icon img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
-    border-radius: 50%;
+    object-fit: fill;
+    /* border-radius: 50%; */
   }
   
   .timeline__details {
@@ -591,7 +599,7 @@ body {
     .hero .section__title { font-size: 2.2rem; }
     .hero .section__text  { font-size: 1rem; }
     .hero .btn            { padding: 10px 30px; font-size: 0.9rem; }
-    .hero                 { padding: 80px 15px; }
+    /* .hero                 { padding: 80px 15px; } */
   
     .countdown h1         { font-size: 16px; margin-bottom: 10px; }
     .time div             { font-size: 25px; }

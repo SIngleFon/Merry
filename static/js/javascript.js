@@ -145,18 +145,23 @@ document.addEventListener("DOMContentLoaded", () => {
     window.location.href = "/"; // Возврат на главную страницу
   });
 
-//   const heroSection = document.querySelector(".hero");
+
+
+  // Установка высоты вьюпорта для мобильных устройств
+  const setViewportHeight = () => {
+    const vh = document.documentElement.clientHeight * 0.01; // 1% от высоты видимой области
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
   
-//   // Функция для установки высоты
-//   const setHeroHeight = () => {
-//     heroSection.style.height = `${window.innerHeight}px`;
-//   };
+  // Устанавливаем высоту при загрузке страницы
+  setViewportHeight();
+  
+  // Обновляем высоту при изменении размера окна
+  window.addEventListener('resize', setViewportHeight);
 
-//   // Устанавливаем высоту при загрузке страницы
-//   setHeroHeight();
 
-//   // Обновляем высоту при изменении размера окна
-//   window.addEventListener("resize", setHeroHeight);
+
+
 const elementsToAnimate = document.querySelectorAll(
   ".timeline__event, .section__title, .section__text, .venue__img, .directions__text h3, .directions__text p, .line"
 );
