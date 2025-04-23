@@ -7,12 +7,11 @@ load_dotenv()
 def get_db_connection():
     try:
         conn = mysql.connector.connect(
-            user="u3104955_default", 
+            user="u3104955_singlef", 
             password=os.getenv('MYSQL_PASS'), 
             host="localhost",
             port="3306",
-            database="u3104955_default",
-            auth_plugin="mysql_native_password"
+            database="u3104955_default"
         )
         print("Соединение с базой данных установлено успешно.")
         return conn
