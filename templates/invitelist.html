@@ -47,6 +47,7 @@
         <th>Присутствие</th>
         <th>Имена</th>
         <th>Напитки</th>
+        <th>Дата и Время</th>
       </tr>
     </thead>
     <tbody>
@@ -56,6 +57,7 @@
         <td>{{ response.attendance }}</td>
         <td>{{ response.name }}</td>
         <td>{{ response.drinks }}</td>
+        <td>{{ response.created_at }}</td>
       </tr>
       {% endfor %}
     </tbody>
